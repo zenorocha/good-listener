@@ -1,0 +1,11 @@
+{
+  "name": "good-listener",
+  "description": "A more versatile way of adding & removing event listeners",
+  "version": "0.0.0",
+  "license": "MIT",
+  "main": "dist/good-listener.js",
+  "keywords": [
+    "event",
+    "listener"
+  ]
+}

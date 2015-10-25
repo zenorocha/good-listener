@@ -1,7 +1,6 @@
 var listen = require('../src/listen');
 var simulant = require('simulant');
 
-
 describe('good-listener', function() {
     before(function() {
         global.node = document.createElement('div');
