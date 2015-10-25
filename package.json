@@ -1,7 +1,7 @@
 {
   "name": "good-listener",
   "description": "A more versatile way of adding & removing event listeners",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "repository": "zenorocha/good-listener",
   "main": "src/listen.js",
   "keywords": [
