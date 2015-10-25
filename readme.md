@@ -22,13 +22,13 @@ If you're not into package management, just [download a ZIP](https://github.com/
 
 ## Setup
 
-### Node (Browserify)
+###### Node (Browserify)
 
 ```js
 var listen = require('good-listener');
 ```
 
-### Browser (Standalone)
+###### Browser (Standalone)
 
 ```html
 <script src="dist/good-listener.js"></script>
@@ -38,7 +38,7 @@ var listen = require('good-listener');
 
 ### Add an event listener
 
-By passing a string selector.
+By passing a string selector [(see full demo)](https://github.com/zenorocha/good-listener/blob/master/demo/selector.html).
 
 ```js
 listen('.btn', 'click', function(e) {
@@ -46,9 +46,9 @@ listen('.btn', 'click', function(e) {
 });
 ```
 
-Or by passing a HTML element.
+Or by passing a HTML element [(see full demo)](https://github.com/zenorocha/good-listener/blob/master/demo/node.html).
 
-```
+```js
 var logo = document.getElementById('logo');
 
 listener.add(logo, 'click', function(e) {
@@ -56,9 +56,9 @@ listener.add(logo, 'click', function(e) {
 });
 ```
 
-Or by passing a list of HTML elements.
+Or by passing a list of HTML elements [(see full demo)](https://github.com/zenorocha/good-listener/blob/master/demo/nodelist.html).
 
-```
+```js
 var anchors = document.querySelectorAll('a');
 
 listener.add(anchors, 'click', function(e) {
@@ -68,7 +68,7 @@ listener.add(anchors, 'click', function(e) {
 
 ### Remove an event listener
 
-By calling the `destroy` function that returned from previous operation.
+By calling the `destroy` function that returned from previous operation [(see full demo)](https://github.com/zenorocha/good-listener/blob/master/demo/destroy.html).
 
 ```js
 var listener = listen('.btn', 'click', function(e) {
