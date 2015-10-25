@@ -14,5 +14,8 @@ function listen(target, type, callback) {
         throw new Error('Missing required arguments');
     }
 
+    if (!is.string(type)) {
+        throw new TypeError('Second argument must be a String');
+    }
 
 module.exports = listen;

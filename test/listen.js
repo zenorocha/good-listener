@@ -10,4 +10,13 @@ describe('listen', function() {
             done();
         }
     });
+    it('should throw an error since "type" was invalid', function(done) {
+        try {
+            listen('.btn', false, function() {});
+        }
+        catch(error) {
+            assert.equal(error.message, 'Second argument must be a String');
+            done();
+        }
+    });
 });
