@@ -1,5 +1,7 @@
 # good-listener
 
+[![Build Status](http://img.shields.io/travis/zenorocha/good-listener/master.svg?style=flat)](https://travis-ci.org/zenorocha/good-listener)
+
 > A more versatile way of adding & removing event listeners.
 
 ![good listener](https://cloud.githubusercontent.com/assets/398893/10718224/dfc25f6c-7b2a-11e5-9d3d-75b35e8603c8.jpg)
