@@ -19,4 +19,14 @@ describe('listen', function() {
             done();
         }
     });
+
+    it('should throw an error since "callback" was invalid', function(done) {
+        try {
+            listen('.btn', 'click', []);
+        }
+        catch(error) {
+            assert.equal(error.message, 'Third argument must be a Function');
+            done();
+        }
+    });
 });
