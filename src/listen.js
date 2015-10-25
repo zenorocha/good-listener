@@ -21,4 +21,18 @@ function listen(target, type, callback) {
     if (!is.function(callback)) {
         throw new TypeError('Third argument must be a Function');
     }
+
+    if (is.node(target)) {
+        listenNode(target, type, callback);
+    }
+    else if (is.nodeList(target)) {
+        listenNodeList(target, type, callback);
+    }
+    else if (is.string(target)) {
+        listenSelector(target, type, callback);
+    }
+    else {
+        throw new TypeError('First argument must be a String, HTMLElement, HTMLCollection, or NodeList');
+    }
+}
 module.exports = listen;

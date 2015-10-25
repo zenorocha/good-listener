@@ -10,6 +10,17 @@ describe('listen', function() {
             done();
         }
     });
+
+    it('should throw an error since "target" was invalid', function(done) {
+        try {
+            listen(null, 'click', function() {});
+        }
+        catch(error) {
+            assert.equal(error.message, 'First argument must be a String, HTMLElement, HTMLCollection, or NodeList');
+            done();
+        }
+    });
+
     it('should throw an error since "type" was invalid', function(done) {
         try {
             listen('.btn', false, function() {});
