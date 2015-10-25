@@ -35,4 +35,22 @@ function listen(target, type, callback) {
         throw new TypeError('First argument must be a String, HTMLElement, HTMLCollection, or NodeList');
     }
 }
+
+/**
+ * Add an event listener to a HTML element.
+ *
+ * @param {HTMLElement} node
+ * @param {String} type
+ * @param {Function} callback
+ * @return {Object}
+ */
+function listenNode(node, type, callback) {
+    node.addEventListener(type, callback);
+
+    return {
+        destroy: function() {
+            node.removeEventListener(type, callback);
+        }
+    }
+}
 module.exports = listen;
