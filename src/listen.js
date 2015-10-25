@@ -23,7 +23,7 @@ function listen(target, type, callback) {
     }
 
     if (is.node(target)) {
-        listenNode(target, type, callback);
+        return listenNode(target, type, callback);
     }
     else if (is.nodeList(target)) {
         listenNodeList(target, type, callback);
@@ -37,7 +37,8 @@ function listen(target, type, callback) {
 }
 
 /**
- * Add an event listener to a HTML element.
+ * Adds an event listener to a HTML element
+ * and returns a remove listener function.
  *
  * @param {HTMLElement} node
  * @param {String} type
