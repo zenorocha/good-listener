@@ -62,4 +62,28 @@ describe('is', function() {
             assert.notOk(is.nodeList(new Number(42)));
         });
     });
+
+    describe('is.string', function() {
+        it('should be considered as string', function() {
+            assert.ok(is.string('abc'));
+            assert.ok(is.string(new String('abc')));
+        });
+
+        it('should not be considered as string', function() {
+            assert.notOk(is.string(undefined));
+            assert.notOk(is.string(null));
+            assert.notOk(is.string(false));
+            assert.notOk(is.string(true));
+            assert.notOk(is.string(function () {}));
+            assert.notOk(is.string([]));
+            assert.notOk(is.string({}));
+            assert.notOk(is.string(/a/g));
+            assert.notOk(is.string(new RegExp('a', 'g')));
+            assert.notOk(is.string(new Date()));
+            assert.notOk(is.string(42));
+            assert.notOk(is.string(NaN));
+            assert.notOk(is.string(Infinity));
+            assert.notOk(is.string(new Number(42)));
+        });
+    });
 });

@@ -12,3 +12,8 @@ exports.nodeList = function(value) {
         && (value.hasOwnProperty('length'))
         && (value.length === 0 || exports.node(value[0]));
 };
+
+exports.string = function(value) {
+    return typeof value === 'string'
+        || value instanceof String;
+};
