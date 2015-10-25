@@ -53,7 +53,7 @@ Or by passing a HTML element [(see full demo)](https://github.com/zenorocha/good
 ```js
 var logo = document.getElementById('logo');
 
-listener.add(logo, 'click', function(e) {
+listen(logo, 'click', function(e) {
     console.log(e);
 });
 ```
@@ -63,7 +63,7 @@ Or by passing a list of HTML elements [(see full demo)](https://github.com/zenor
 ```js
 var anchors = document.querySelectorAll('a');
 
-listener.add(anchors, 'click', function(e) {
+listen(anchors, 'click', function(e) {
     console.log(e);
 });
 ```
