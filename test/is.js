@@ -86,4 +86,26 @@ describe('is', function() {
             assert.notOk(is.string(new Number(42)));
         });
     });
+
+    describe('is.function', function() {
+        it('should be considered as function', function() {
+            assert.ok(is.function(function () {}));
+        });
+
+        it('should not be considered as function', function() {
+            assert.notOk(is.function(undefined));
+            assert.notOk(is.function(null));
+            assert.notOk(is.function(false));
+            assert.notOk(is.function(true));
+            assert.notOk(is.function([]));
+            assert.notOk(is.function({}));
+            assert.notOk(is.function(/a/g));
+            assert.notOk(is.function(new RegExp('a', 'g')));
+            assert.notOk(is.function(new Date()));
+            assert.notOk(is.function(42));
+            assert.notOk(is.function(NaN));
+            assert.notOk(is.function(Infinity));
+            assert.notOk(is.function(new Number(42)));
+        });
+    });
 });

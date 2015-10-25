@@ -17,3 +17,9 @@ exports.string = function(value) {
     return typeof value === 'string'
         || value instanceof String;
 };
+
+exports.function = function(value) {
+    var type = Object.prototype.toString.call(value);
+
+    return type === '[object Function]';
+};
