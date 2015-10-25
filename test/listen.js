@@ -79,4 +79,16 @@ describe('good-listener', function() {
             simulant.fire(targets[0], simulant('click'));
         });
     });
+
+    describe('listenSelector', function() {
+        it('should add an event listener', function(done) {
+            var target = document.querySelector('.foo');
+
+            listen('.foo', 'click', function() {
+                done();
+            });
+
+            simulant.fire(target, simulant('click'));
+        });
+    });
 });

@@ -76,4 +76,30 @@ function listenNodeList(nodeList, type, callback) {
         }
     }
 }
+
+/**
+ * Add an event listener to a selector
+ * and returns a remove listener function.
+ *
+ * @param {String} selector
+ * @param {String} type
+ * @param {Function} callback
+ * @return {Object}
+ */
+function listenSelector(selector, type, callback) {
+    var nodes = document.querySelectorAll(selector);
+
+    [].forEach.call(nodes, function(node) {
+        node.addEventListener(type, callback);
+    });
+
+    return {
+        destroy: function() {
+            [].forEach.call(nodes, function(node) {
+                node.removeEventListener(type, callback);
+            });
+        }
+    }
+}
+
 module.exports = listen;
