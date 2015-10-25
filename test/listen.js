@@ -109,14 +109,28 @@ describe('good-listener', function() {
     });
 
     describe('listenSelector', function() {
-        it('should add an event listener', function(done) {
-            var target = document.querySelector('.foo');
+        before(function() {
+            global.target = document.querySelector('.foo');
+            global.spy = sinon.spy(global.target, 'removeEventListener');
+        });
 
+        after(function() {
+            global.spy.restore();
+        });
+
+        it('should add an event listener', function(done) {
             listen('.foo', 'click', function() {
                 done();
             });
 
-            simulant.fire(target, simulant('click'));
+            simulant.fire(global.target, simulant('click'));
+        });
+
+        it('should remove an event listener', function() {
+            var listener = listen('.foo', 'click', function() {});
+
+            listener.destroy();
+            assert.ok(global.spy.calledOnce);
         });
     });
 });

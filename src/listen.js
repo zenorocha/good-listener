@@ -29,7 +29,7 @@ function listen(target, type, callback) {
         return listenNodeList(target, type, callback);
     }
     else if (is.string(target)) {
-        listenSelector(target, type, callback);
+        return listenSelector(target, type, callback);
     }
     else {
         throw new TypeError('First argument must be a String, HTMLElement, HTMLCollection, or NodeList');
