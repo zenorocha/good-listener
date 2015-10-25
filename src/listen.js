@@ -26,7 +26,7 @@ function listen(target, type, callback) {
         return listenNode(target, type, callback);
     }
     else if (is.nodeList(target)) {
-        listenNodeList(target, type, callback);
+        return listenNodeList(target, type, callback);
     }
     else if (is.string(target)) {
         listenSelector(target, type, callback);
