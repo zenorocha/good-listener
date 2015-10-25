@@ -4,6 +4,10 @@
   "version": "0.0.0",
   "repository": "zenorocha/good-listener",
   "main": "src/listen.js",
+  "keywords": [
+    "event",
+    "listener"
+  ],
   "devDependencies": {
     "browserify": "^11.2.0",
     "karma": "^0.13.10",
