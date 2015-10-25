@@ -37,4 +37,29 @@ describe('is', function() {
             assert.notOk(is.node(new Number(42)));
         });
     });
+
+    describe('is.nodeList', function() {
+        it('should be considered as nodeList', function() {
+            assert.ok(is.nodeList(document.getElementsByTagName('div')));
+            assert.ok(is.nodeList(document.getElementsByClassName('foo')));
+            assert.ok(is.nodeList(document.querySelectorAll('.foo')));
+        });
+
+        it('should not be considered as nodeList', function() {
+            assert.notOk(is.nodeList(undefined));
+            assert.notOk(is.nodeList(null));
+            assert.notOk(is.nodeList(false));
+            assert.notOk(is.nodeList(true));
+            assert.notOk(is.nodeList(function () {}));
+            assert.notOk(is.nodeList([]));
+            assert.notOk(is.nodeList({}));
+            assert.notOk(is.nodeList(/a/g));
+            assert.notOk(is.nodeList(new RegExp('a', 'g')));
+            assert.notOk(is.nodeList(new Date()));
+            assert.notOk(is.nodeList(42));
+            assert.notOk(is.nodeList(NaN));
+            assert.notOk(is.nodeList(Infinity));
+            assert.notOk(is.nodeList(new Number(42)));
+        });
+    });
 });
