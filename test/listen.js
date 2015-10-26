@@ -110,7 +110,7 @@ describe('good-listener', function() {
     describe('listenSelector', function() {
         before(function() {
             global.target = document.querySelector('.foo');
-            global.spy = sinon.spy(global.target, 'removeEventListener');
+            global.spy = sinon.spy(document.body, 'removeEventListener');
         });
 
         after(function() {

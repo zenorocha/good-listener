@@ -1,4 +1,5 @@
 var is = require('./is');
+var delegate = require('delegate');
 
 /**
  * Validates all params and calls the right
@@ -88,19 +89,7 @@ function listenNodeList(nodeList, type, callback) {
  * @return {Object}
  */
 function listenSelector(selector, type, callback) {
-    var nodes = document.querySelectorAll(selector);
-
-    Array.prototype.forEach.call(nodes, function(node) {
-        node.addEventListener(type, callback);
-    });
-
-    return {
-        destroy: function() {
-            Array.prototype.forEach.call(nodes, function(node) {
-                node.removeEventListener(type, callback);
-            });
-        }
-    }
+    return delegate(document.body, selector, type, callback);
 }
 
 module.exports = listen;

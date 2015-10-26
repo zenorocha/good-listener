@@ -6,7 +6,8 @@ module.exports = function(karma) {
 
         files: [
             'src/**/*.js',
-            'test/**/*.js'
+            'test/**/*.js',
+            './node_modules/phantomjs-polyfill/bind-polyfill.js'
         ],
 
         preprocessors: {
