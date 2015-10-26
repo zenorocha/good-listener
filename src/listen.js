@@ -77,8 +77,8 @@ function listenSelector(selector, type, callback) {
 }
 
 /**
- * Factory to create an event listener to a element
- * and returns a remove listener function.
+ * Factory to create an event listener to a list of
+ * elements and returns a remove listener function.
  *
  * @param {NodeList|HTMLCollection|HTMLElement} elements
  * @param {String} type
