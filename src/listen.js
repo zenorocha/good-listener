@@ -46,13 +46,7 @@ function listen(target, type, callback) {
  * @return {Object}
  */
 function listenNode(node, type, callback) {
-    node.addEventListener(type, callback);
-
-    return {
-        destroy: function() {
-            node.removeEventListener(type, callback);
-        }
-    }
+    return listenFactory([node], type, callback);
 }
 
 /**
@@ -65,17 +59,7 @@ function listenNode(node, type, callback) {
  * @return {Object}
  */
 function listenNodeList(nodeList, type, callback) {
-    [].forEach.call(nodeList, function(node) {
-        node.addEventListener(type, callback);
-    });
-
-    return {
-        destroy: function() {
-            [].forEach.call(nodeList, function(node) {
-                node.removeEventListener(type, callback);
-            });
-        }
-    }
+    return listenFactory(nodeList, type, callback);
 }
 
 /**
@@ -89,18 +73,30 @@ function listenNodeList(nodeList, type, callback) {
  */
 function listenSelector(selector, type, callback) {
     var nodes = document.querySelectorAll(selector);
+    return listenFactory(nodes, type, callback);
+}
 
-    [].forEach.call(nodes, function(node) {
-        node.addEventListener(type, callback);
+/**
+ * Factory to create an event listener to a list of
+ * elements and returns a remove listener function.
+ *
+ * @param {NodeList|HTMLCollection|HTMLElement} elements
+ * @param {String} type
+ * @param {Function} callback
+ * @return {Object}
+ */
+function listenFactory(elements, type, callback) {
+    Array.prototype.forEach.call(elements, function(element) {
+        element.addEventListener(type, callback, false);
     });
 
     return {
         destroy: function() {
-            [].forEach.call(nodes, function(node) {
-                node.removeEventListener(type, callback);
+            Array.prototype.forEach.call(elements, function(element) {
+                element.removeEventListener(type, callback);
             });
         }
-    }
+    };
 }
 
 module.exports = listen;
