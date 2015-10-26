@@ -1,4 +1,102 @@
 (function(f){if(typeof exports==="object"&&typeof module!=="undefined"){module.exports=f()}else if(typeof define==="function"&&define.amd){define([],f)}else{var g;if(typeof window!=="undefined"){g=window}else if(typeof global!=="undefined"){g=global}else if(typeof self!=="undefined"){g=self}else{g=this}g.listen = f()}})(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+var matches = require('matches-selector')
+
+module.exports = function (element, selector, checkYoSelf) {
+  var parent = checkYoSelf ? element : element.parentNode
+
+  while (parent && parent !== document) {
+    if (matches(parent, selector)) return parent;
+    parent = parent.parentNode
+  }
+}
+
+},{"matches-selector":2}],2:[function(require,module,exports){
+
+/**
+ * Element prototype.
+ */
+
+var proto = Element.prototype;
+
+/**
+ * Vendor function.
+ */
+
+var vendor = proto.matchesSelector
+  || proto.webkitMatchesSelector
+  || proto.mozMatchesSelector
+  || proto.msMatchesSelector
+  || proto.oMatchesSelector;
+
+/**
+ * Expose `match()`.
+ */
+
+module.exports = match;
+
+/**
+ * Match `el` to `selector`.
+ *
+ * @param {Element} el
+ * @param {String} selector
+ * @return {Boolean}
+ * @api public
+ */
+
+function match(el, selector) {
+  if (vendor) return vendor.call(el, selector);
+  var nodes = el.parentNode.querySelectorAll(selector);
+  for (var i = 0; i < nodes.length; ++i) {
+    if (nodes[i] == el) return true;
+  }
+  return false;
+}
+},{}],3:[function(require,module,exports){
+var closest = require('closest');
+
+/**
+ * Delegates event `type` to `selector`.
+ *
+ * @param {Element} element
+ * @param {String} selector
+ * @param {String} type
+ * @param {Function} callback
+ * @return {Object}
+ */
+function delegate(element, selector, type, callback) {
+    this.element  = element;
+    this.selector = selector;
+    this.type     = type;
+    this.callback = callback;
+
+    var cachedListener = listener.bind(this);
+
+    element.addEventListener(type, cachedListener);
+
+    return {
+        destroy: function() {
+            element.removeEventListener(type, cachedListener);
+        }
+    }
+}
+
+/**
+ * Finds closest match and invokes `callback(e)`.
+ *
+ * @param {Event} e
+ */
+function listener(e) {
+    var delegateTarget = closest(e.target, selector, true);
+
+    if (delegateTarget) {
+        e.target = delegateTarget;
+        callback.call(element, e);
+    }
+}
+
+module.exports = delegate;
+
+},{"closest":1}],4:[function(require,module,exports){
 /**
  * Check if argument is a HTML element.
  *
@@ -49,8 +147,9 @@ exports.function = function(value) {
     return type === '[object Function]';
 };
 
-},{}],2:[function(require,module,exports){
+},{}],5:[function(require,module,exports){
 var is = require('./is');
+var delegate = require('delegate');
 
 /**
  * Validates all params and calls the right
@@ -117,13 +216,13 @@ function listenNode(node, type, callback) {
  * @return {Object}
  */
 function listenNodeList(nodeList, type, callback) {
-    [].forEach.call(nodeList, function(node) {
+    Array.prototype.forEach.call(nodeList, function(node) {
         node.addEventListener(type, callback);
     });
 
     return {
         destroy: function() {
-            [].forEach.call(nodeList, function(node) {
+            Array.prototype.forEach.call(nodeList, function(node) {
                 node.removeEventListener(type, callback);
             });
         }
@@ -140,22 +239,10 @@ function listenNodeList(nodeList, type, callback) {
  * @return {Object}
  */
 function listenSelector(selector, type, callback) {
-    var nodes = document.querySelectorAll(selector);
-
-    [].forEach.call(nodes, function(node) {
-        node.addEventListener(type, callback);
-    });
-
-    return {
-        destroy: function() {
-            [].forEach.call(nodes, function(node) {
-                node.removeEventListener(type, callback);
-            });
-        }
-    }
+    return delegate(document.body, selector, type, callback);
 }
 
 module.exports = listen;
 
-},{"./is":1}]},{},[2])(2)
+},{"./is":4,"delegate":3}]},{},[5])(5)
 });
