@@ -9,7 +9,7 @@
     "listener"
   ],
   "dependencies": {
-    "delegate": "^2.0.2"
+    "delegate": "^2.0.3"
   },
   "devDependencies": {
     "browserify": "^11.2.0",
