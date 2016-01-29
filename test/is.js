@@ -87,25 +87,25 @@ describe('is', function() {
         });
     });
 
-    describe('is.function', function() {
+    describe('is.fn', function() {
         it('should be considered as function', function() {
-            assert.ok(is.function(function () {}));
+            assert.ok(is.fn(function () {}));
         });
 
         it('should not be considered as function', function() {
-            assert.notOk(is.function(undefined));
-            assert.notOk(is.function(null));
-            assert.notOk(is.function(false));
-            assert.notOk(is.function(true));
-            assert.notOk(is.function([]));
-            assert.notOk(is.function({}));
-            assert.notOk(is.function(/a/g));
-            assert.notOk(is.function(new RegExp('a', 'g')));
-            assert.notOk(is.function(new Date()));
-            assert.notOk(is.function(42));
-            assert.notOk(is.function(NaN));
-            assert.notOk(is.function(Infinity));
-            assert.notOk(is.function(new Number(42)));
+            assert.notOk(is.fn(undefined));
+            assert.notOk(is.fn(null));
+            assert.notOk(is.fn(false));
+            assert.notOk(is.fn(true));
+            assert.notOk(is.fn([]));
+            assert.notOk(is.fn({}));
+            assert.notOk(is.fn(/a/g));
+            assert.notOk(is.fn(new RegExp('a', 'g')));
+            assert.notOk(is.fn(new Date()));
+            assert.notOk(is.fn(42));
+            assert.notOk(is.fn(NaN));
+            assert.notOk(is.fn(Infinity));
+            assert.notOk(is.fn(new Number(42)));
         });
     });
 });
