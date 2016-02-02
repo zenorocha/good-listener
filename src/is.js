@@ -42,7 +42,7 @@ exports.string = function(value) {
  * @param {Object} value
  * @return {Boolean}
  */
-exports.function = function(value) {
+exports.fn = function(value) {
     var type = Object.prototype.toString.call(value);
 
     return type === '[object Function]';

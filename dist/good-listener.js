@@ -169,7 +169,7 @@ function listen(target, type, callback) {
         throw new TypeError('Second argument must be a String');
     }
 
-    if (!is.function(callback)) {
+    if (!is.fn(callback)) {
         throw new TypeError('Third argument must be a Function');
     }
 
