@@ -6,6 +6,12 @@ describe('is', function() {
         global.node.setAttribute('id', 'foo');
         global.node.setAttribute('class', 'foo');
         document.body.appendChild(global.node);
+
+        global.svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+        global.svg.setAttributeNS('http://www.w3.org/2000/xmlns/', 'xmlns:xlink', 'http://www.w3.org/1999/xlink');
+        global.svg.setAttribute('id', 'svg');
+        global.svg.setAttribute('class', 'svg');
+        document.body.appendChild(global.svg);
     });
 
     after(function() {
@@ -29,6 +35,12 @@ describe('is', function() {
             // is.string
             assert.notOk(is.node('abc'));
             assert.notOk(is.node(new String('abc')));
+
+            // is.svg
+            assert.notOk(is.node(document.getElementById('svg')));
+            assert.notOk(is.node(document.getElementsByTagName('svg')[0]));
+            assert.notOk(is.node(document.getElementsByClassName('svg')[0]));
+            assert.notOk(is.node(document.querySelector('.svg')));
 
             // is.fn
             assert.notOk(is.node(function () {}));
@@ -68,6 +80,11 @@ describe('is', function() {
             assert.notOk(is.nodeList('abc'));
             assert.notOk(is.nodeList(new String('abc')));
 
+            // is.svg
+            assert.notOk(is.nodeList(document.getElementById('svg')));
+            assert.notOk(is.nodeList(document.getElementsByTagName('svg')[0]));
+            assert.notOk(is.nodeList(document.getElementsByClassName('svg')[0]));
+            assert.notOk(is.nodeList(document.querySelector('.svg')));
 
             // is.fn
             assert.notOk(is.nodeList(function () {}));
@@ -107,6 +124,11 @@ describe('is', function() {
             assert.notOk(is.string(document.getElementsByClassName('foo')));
             assert.notOk(is.string(document.querySelectorAll('.foo')));
 
+            // is.svg
+            assert.notOk(is.string(document.getElementById('svg')));
+            assert.notOk(is.string(document.getElementsByTagName('svg')[0]));
+            assert.notOk(is.string(document.getElementsByClassName('svg')[0]));
+            assert.notOk(is.string(document.querySelector('.svg')));
 
             // is.fn
             assert.notOk(is.string(function () {}));
@@ -125,6 +147,50 @@ describe('is', function() {
             assert.notOk(is.string(NaN));
             assert.notOk(is.string(Infinity));
             assert.notOk(is.string(new Number(42)));
+        });
+    });
+
+    describe('is.svg', function() {
+        it('should be considered as svg', function() {
+            assert.ok(is.svg(document.getElementById('svg')));
+            assert.ok(is.svg(document.getElementsByTagName('svg')[0]));
+            assert.ok(is.svg(document.getElementsByClassName('svg')[0]));
+            assert.ok(is.svg(document.querySelector('.svg')));
+        });
+
+        it('should not be considered as svg', function() {
+            // is.node
+            assert.notOk(is.svg(document.getElementById('foo')));
+            assert.notOk(is.svg(document.getElementsByTagName('div')[0]));
+            assert.notOk(is.svg(document.getElementsByClassName('foo')[0]));
+            assert.notOk(is.svg(document.querySelector('.foo')));
+
+            // is.nodeList
+            assert.notOk(is.svg(document.getElementsByTagName('div')));
+            assert.notOk(is.svg(document.getElementsByClassName('foo')));
+            assert.notOk(is.svg(document.querySelectorAll('.foo')));
+
+            // is.string
+            assert.notOk(is.svg('abc'));
+            assert.notOk(is.svg(new String('abc')));
+
+            // is.fn
+            assert.notOk(is.svg(function () {}));
+
+            // everything else
+            assert.notOk(is.svg(undefined));
+            assert.notOk(is.svg(null));
+            assert.notOk(is.svg(false));
+            assert.notOk(is.svg(true));
+            assert.notOk(is.svg([]));
+            assert.notOk(is.svg({}));
+            assert.notOk(is.svg(/a/g));
+            assert.notOk(is.svg(new RegExp('a', 'g')));
+            assert.notOk(is.svg(new Date()));
+            assert.notOk(is.svg(42));
+            assert.notOk(is.svg(NaN));
+            assert.notOk(is.svg(Infinity));
+            assert.notOk(is.svg(new Number(42)));
         });
     });
 
@@ -149,6 +215,11 @@ describe('is', function() {
             assert.notOk(is.fn('abc'));
             assert.notOk(is.fn(new String('abc')));
 
+            // is.svg
+            assert.notOk(is.fn(document.getElementById('svg')));
+            assert.notOk(is.fn(document.getElementsByTagName('svg')[0]));
+            assert.notOk(is.fn(document.getElementsByClassName('svg')[0]));
+            assert.notOk(is.fn(document.querySelector('.svg')));
 
             // everything else
             assert.notOk(is.fn(undefined));

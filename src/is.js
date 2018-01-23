@@ -26,6 +26,17 @@ exports.nodeList = function(value) {
 };
 
 /**
+ * Check if argument is a SVG element.
+ *
+ * @param {Object} value
+ * @return {Boolean}
+ */
+exports.svg = function(value) {
+    return value !== undefined
+        && value instanceof SVGElement;
+};
+
+/**
  * Check if argument is a string.
  *
  * @param {Object} value
