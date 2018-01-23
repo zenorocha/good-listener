@@ -21,11 +21,23 @@ describe('is', function() {
         });
 
         it('should not be considered as node', function() {
+            // is.nodeList
+            assert.notOk(is.node(document.getElementsByTagName('div')));
+            assert.notOk(is.node(document.getElementsByClassName('foo')));
+            assert.notOk(is.node(document.querySelectorAll('.foo')));
+
+            // is.string
+            assert.notOk(is.node('abc'));
+            assert.notOk(is.node(new String('abc')));
+
+            // is.fn
+            assert.notOk(is.node(function () {}));
+
+            // everything else
             assert.notOk(is.node(undefined));
             assert.notOk(is.node(null));
             assert.notOk(is.node(false));
             assert.notOk(is.node(true));
-            assert.notOk(is.node(function () {}));
             assert.notOk(is.node([]));
             assert.notOk(is.node({}));
             assert.notOk(is.node(/a/g));
@@ -46,11 +58,25 @@ describe('is', function() {
         });
 
         it('should not be considered as nodeList', function() {
+            // is.node
+            assert.notOk(is.nodeList(document.getElementById('foo')));
+            assert.notOk(is.nodeList(document.getElementsByTagName('div')[0]));
+            assert.notOk(is.nodeList(document.getElementsByClassName('foo')[0]));
+            assert.notOk(is.nodeList(document.querySelector('.foo')));
+
+            // is.string
+            assert.notOk(is.nodeList('abc'));
+            assert.notOk(is.nodeList(new String('abc')));
+
+
+            // is.fn
+            assert.notOk(is.nodeList(function () {}));
+
+            // everything else
             assert.notOk(is.nodeList(undefined));
             assert.notOk(is.nodeList(null));
             assert.notOk(is.nodeList(false));
             assert.notOk(is.nodeList(true));
-            assert.notOk(is.nodeList(function () {}));
             assert.notOk(is.nodeList([]));
             assert.notOk(is.nodeList({}));
             assert.notOk(is.nodeList(/a/g));
@@ -70,11 +96,26 @@ describe('is', function() {
         });
 
         it('should not be considered as string', function() {
+            // is.node
+            assert.notOk(is.string(document.getElementById('foo')));
+            assert.notOk(is.string(document.getElementsByTagName('div')[0]));
+            assert.notOk(is.string(document.getElementsByClassName('foo')[0]));
+            assert.notOk(is.string(document.querySelector('.foo')));
+
+            // is.nodeList
+            assert.notOk(is.string(document.getElementsByTagName('div')));
+            assert.notOk(is.string(document.getElementsByClassName('foo')));
+            assert.notOk(is.string(document.querySelectorAll('.foo')));
+
+
+            // is.fn
+            assert.notOk(is.string(function () {}));
+
+            // everything else
             assert.notOk(is.string(undefined));
             assert.notOk(is.string(null));
             assert.notOk(is.string(false));
             assert.notOk(is.string(true));
-            assert.notOk(is.string(function () {}));
             assert.notOk(is.string([]));
             assert.notOk(is.string({}));
             assert.notOk(is.string(/a/g));
@@ -93,6 +134,23 @@ describe('is', function() {
         });
 
         it('should not be considered as function', function() {
+            // is.node
+            assert.notOk(is.fn(document.getElementById('foo')));
+            assert.notOk(is.fn(document.getElementsByTagName('div')[0]));
+            assert.notOk(is.fn(document.getElementsByClassName('foo')[0]));
+            assert.notOk(is.fn(document.querySelector('.foo')));
+
+            // is.nodeList
+            assert.notOk(is.fn(document.getElementsByTagName('div')));
+            assert.notOk(is.fn(document.getElementsByClassName('foo')));
+            assert.notOk(is.fn(document.querySelectorAll('.foo')));
+
+            // is.string
+            assert.notOk(is.fn('abc'));
+            assert.notOk(is.fn(new String('abc')));
+
+
+            // everything else
             assert.notOk(is.fn(undefined));
             assert.notOk(is.fn(null));
             assert.notOk(is.fn(false));
